@@ -1,0 +1,16 @@
+.main-container-sidenav{
+    flex: 1 1 0;
+    height: 100vh;
+    border-right: 1px solid black;
+    position: fixed;
+
+}
+
+.logo-container-sidenav{
+    width: 8rem;
+    padding: 2rem 3rem 2rem 1rem;
+}
+
+.icon{
+    width: 1.5rem;
+}

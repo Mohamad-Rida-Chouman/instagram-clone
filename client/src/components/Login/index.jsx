@@ -2,8 +2,36 @@ import React, { useState } from 'react';
 import './login.css';
 import '../../utilities.css';
 import Signup from '../Signup';
+import axios from 'axios';
 
 const Login = () => {
+
+	const [formData, setFormData] = useState({
+        email: "",
+        password: ""
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+        ...formData,
+        [name]: value
+        });
+    };
+    
+    const handleLoginUser = async () => {
+        try {
+          await axios.post('http://127.0.0.1:8000/api/login', formData);
+          console.log('User logged in successfully!');
+          setFormData({
+            email: "",
+            password: "",
+          });
+        } catch (error) {
+          console.error('Error logging in:', error);
+        }
+    };
+
 	const [redirectToSignup, setRedirectToSignup] = useState(false);
 
 	const handleClick = () => {
@@ -26,12 +54,12 @@ const Login = () => {
 				</div>
 				<div className="login-form-content flex flex-col wrap align-center gap-m">
 					<div className="input-email flex flex-col justify-between gap-s">
-						<input className=' input-box-login' type="email" name="email" placeholder="Email" />
+						<input className=' input-box-login' type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} />
 					</div>
 					<div className="input-password flex flex-col justify-between gap-s">
-						<input className=' input-box-login' type="password" name="password" placeholder="Password" />
+						<input className=' input-box-login' type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} />
 					</div>
-					<button className="login-button flex width-100 justify-center">
+					<button onClick={handleLoginUser} className="login-button flex width-100 justify-center">
 						Log in
 					</button>
 				</div>
