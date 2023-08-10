@@ -13,13 +13,16 @@ class Post extends Model
         'image_url', 'number_of_likes',
     ];
 
-    public function user()
-    {
-        return $this -> belongsTo(User::class);
+    // public function user()
+    // {
+    //     return $this -> belongsTo(User::class);
+    // }
+
+    public function owner(): BelongsTo {
+        return $this->belongsTo(User::class, 'user_posts', 'post_id', 'user_id')->withTimeStamps();
     }
 
-    public function likes()
-    {
-        return $this -> hasMany(Like::class);
+    public function liked(): BelongsToMany {
+        return $this->belongsToMany(User::class, 'likes', 'post_id', 'user_id')->withTimeStamps();
     }
 }

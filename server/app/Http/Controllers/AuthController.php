@@ -90,4 +90,17 @@ class AuthController extends Controller
         ]);
     }
 
+    public function addPost (Request $request, User $user){
+        $postId = $request->get('post_id');
+        if($postId){
+            $user->postsRelation()->sync($postId);
+        }
+    }
+
+    public function addLike (Request $request, User $user){
+        $postId = $request->get('post_id');
+        if($postId){
+            $user->likes()->sync($postId);
+        }
+    }
 }

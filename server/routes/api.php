@@ -12,6 +12,8 @@ Route::controller(AuthController::class)->group(function(){
     Route::post('refresh', 'refresh');
 });
 
+Route::resource('posts', PostController::class);
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
