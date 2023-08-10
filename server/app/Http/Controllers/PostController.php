@@ -67,10 +67,37 @@ class PostController extends Controller
     }
 
     public function addLike(Request $request, Post $post){
+        //increment likes nb
+        $nbLikes = $post['number_of_likes'];
+        $post->number_of_likes = $nbLikes+1;
+        $post->save();
+        //assign like to user
         $userId = $request->get('user_id');
         if($userId){
-            $post->liked()->sync($userId);
+            $post->liked()->attach($userId);
         }
+        return ("liked!");
     }
+
+    public function removeLike(Request $request, Post $post){
+        //decrement likes nb
+        $nbLikes = $post['number_of_likes'];
+        $post->number_of_likes = $nbLikes-1;
+        $post->save();
+        //remove like of user
+        $userId = $request->get('user_id');
+        if($userId){
+            $post->liked()->detach($userId);
+        }
+        return ("unliked!");
+    }
+
+    // public function incrementLikes(Request $request, Post $post)
+    // {
+    //     $nbLikes = $post['number_of_likes'];
+    //     $post->number_of_likes = $nbLikes+1;
+    //     $post->save();
+    //     return response()->json($post, 200);
+    // }
 
 }
