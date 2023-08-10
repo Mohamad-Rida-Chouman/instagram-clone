@@ -21,12 +21,15 @@ const Login = () => {
     
     const handleLoginUser = async () => {
         try {
-          await axios.post('http://127.0.0.1:8000/api/login', formData);
+          const response = await axios.post('http://127.0.0.1:8000/api/login', formData);
           console.log('User logged in successfully!');
+		  console.log(response.data.authorisation.token)
+		  localStorage.setItem('token', response.token);
           setFormData({
             email: "",
             password: "",
           });
+		  window.location.reload();
         } catch (error) {
           console.error('Error logging in:', error);
         }
