@@ -23,14 +23,16 @@ const Signup = () => {
     
     const handleAddUser = async () => {
         try {
-          await axios.post('http://127.0.0.1:8000/api/register', formData);
+          const response = await axios.post('http://127.0.0.1:8000/api/register', formData);
           console.log('User added successfully!');
+          localStorage.setItem('token', response.data.authorisation.token);
           setFormData({
             name: "",
             username: "",
             email: "",
             password: "",
           });
+          window.location.reload();
         } catch (error) {
           console.error('Error adding user:', error);
         }

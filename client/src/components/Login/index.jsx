@@ -24,7 +24,7 @@ const Login = () => {
           const response = await axios.post('http://127.0.0.1:8000/api/login', formData);
           console.log('User logged in successfully!');
 		  console.log(response.data.authorisation.token)
-		  localStorage.setItem('token', response.token);
+		  localStorage.setItem('token', response.data.authorisation.token);
           setFormData({
             email: "",
             password: "",

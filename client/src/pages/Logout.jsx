@@ -6,14 +6,15 @@ const Logout = () => {
 
     const handleLogout = async () => {
         try {
-            await axios.post('http://127.0.0.1:8000/api/logout', {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer '+ localStorage.getItem('token')
-                },      
-            }) 
-          console.log('User logged out successfully!');
-		  localStorage.removeItem('token');
+            localStorage.removeItem('token');
+        //     await axios.post('http://127.0.0.1:8000/api/logout', {
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //             'Authorization': 'Bearer '+ localStorage.getItem('token')
+        //         },      
+        //     }) 
+        //   console.log('User logged out successfully!');
+		 
           window.location.reload();
         } catch (error) {
           console.error('Error logging out', error);
