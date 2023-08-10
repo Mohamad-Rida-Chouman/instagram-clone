@@ -90,17 +90,35 @@ class AuthController extends Controller
         ]);
     }
 
-    public function addPost (Request $request, User $user){
-        $postId = $request->get('post_id');
-        if($postId){
-            $user->postsRelation()->sync($postId);
+    // public function addPost (Request $request, User $user){
+    //     $postId = $request->get('post_id');
+    //     if($postId){
+    //         $user->postsRelation()->sync($postId);
+    //     }
+    // }
+
+    // public function addLike (Request $request, User $user){
+    //     $postId = $request->get('post_id');
+    //     if($postId){
+    //         $user->likes()->sync($postId);
+    //     }
+    // }
+
+    public function addFollower(Request $request, User $user){
+        //assign follower to user
+        $userId = $request->get('user_id'); //to be followed
+        if($userId){
+            $user->following()->attach($userId);
         }
+        return ("following!");
     }
 
-    public function addLike (Request $request, User $user){
-        $postId = $request->get('post_id');
-        if($postId){
-            $user->likes()->sync($postId);
+    public function removeFollower(Request $request, User $user){
+        //remove follower from user
+        $userId = $request->get('user_id'); //to be removed
+        if($userId){
+            $user->following()->detach($userId);
         }
+        return ("unfollowing!");
     }
 }

@@ -52,7 +52,7 @@ class User extends Authenticatable  implements JWTSubject
 
     public function following()
     {
-        return $this -> belongsToMany(User::class, 'followers', 'follower_id', 'user_id');
+        return $this -> belongsToMany(User::class, 'followers', 'follower_id', 'user_id')->withTimestamps();
     }
 
     public function postsRelation(){
