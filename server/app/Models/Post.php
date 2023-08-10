@@ -18,11 +18,11 @@ class Post extends Model
     //     return $this -> belongsTo(User::class);
     // }
 
-    public function owner(): BelongsTo {
-        return $this->belongsTo(User::class, 'user_posts', 'post_id', 'user_id')->withTimeStamps();
+    public function owner(){
+        return $this->belongsToMany(User::class, 'user_posts', 'post_id', 'user_id')->withTimeStamps();
     }
 
-    public function liked(): BelongsToMany {
+    public function liked(){
         return $this->belongsToMany(User::class, 'likes', 'post_id', 'user_id')->withTimeStamps();
     }
 }

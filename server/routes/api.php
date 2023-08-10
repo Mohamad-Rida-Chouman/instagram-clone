@@ -13,6 +13,8 @@ Route::controller(AuthController::class)->group(function(){
 });
 
 Route::resource('posts', PostController::class);
+Route::post('posts/{post}/user_posts', [PostController::class, 'assignToUser']);
+Route::post('posts/{post}/likes', [PostController::class, 'addLike']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
